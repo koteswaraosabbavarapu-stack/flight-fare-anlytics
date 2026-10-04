@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+.DS_Store
+.streamlit/secrets.toml
+flight_fares_raw.csv
+flight-fare-dav.zip
+flight-fare-dav/
