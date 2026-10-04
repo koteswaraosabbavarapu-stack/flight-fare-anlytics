@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Flight Fare Analysis and Prediction - Project Report - S. Koteswarao (A24126510107)</title>
+<style>
+  @page {
+    size: A4;
+    margin: 20mm 15mm 20mm 15mm;
+  }
+  @media print {
+    body {
+      font-size: 11pt;
+      line-height: 1.5;
+      background: white;
+    }
+    .page-break {
+      page-break-after: always;
+      break-after: page;
+    }
+    .no-print {
+      display: none;
+    }
+    .page-frame {
+      border: 1.5px solid #1a237e;
+      padding: 15px;
+      margin-bottom: 20px;
+      min-height: 98vh;
+      box-sizing: border-box;
+    }
+  }
+  
+  body {
+    font-family: "Calibri", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    color: #222;
+    background-color: #f4f6f9;
+    margin: 0;
+    padding: 20px;
+  }
+
+  .report-container {
+    max-width: 850px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 40px 50px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  }
+
+  .cover-frame {
+    border: 2px solid #1a237e;
+    padding: 30px 20px;
+    text-align: center;
+    min-height: 950px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-sizing: border-box;
+  }
+
+  .cert-frame {
+    border: 2px solid #1a237e;
+    padding: 30px 25px;
+    min-height: 950px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-sizing: border-box;
+  }
+
+  .inst-header {
+    text-align: center;
+    border-bottom: 2px solid #1a237e;
+    padding-bottom: 8px;
+    margin-bottom: 20px;
+  }
+  .inst-header h4 {
+    margin: 2px 0;
+    color: #1a237e;
+    font-size: 11pt;
+    letter-spacing: 0.5px;
+  }
+  .inst-header h5 {
+    margin: 2px 0;
+    color: #333;
+    font-size: 10pt;
+    font-weight: 600;
+  }
+
+  .page-footer {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid #aaa;
+    padding-top: 6px;
+    margin-top: 25px;
+    font-size: 9pt;
+    color: #555;
+  }
+
+  h1.project-title {
+    font-size: 26pt;
+    color: #0d47a1;
+    margin: 20px 0;
+    letter-spacing: 1px;
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+
+  h2.section-heading {
+    color: #0d47a1;
+    border-bottom: 2px solid #0d47a1;
+    padding-bottom: 4px;
+    margin-top: 30px;
+    font-size: 15pt;
+  }
+
+  h3.subsection-heading {
+    color: #1565c0;
+    margin-top: 18px;
+    font-size: 12pt;
+  }
+
+  p, li {
+    font-size: 10.5pt;
+    line-height: 1.55;
+    text-align: justify;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
+    font-size: 10pt;
+  }
+
+  table, th, td {
+    border: 1px solid #bbb;
+  }
+
+  th {
+    background-color: #e3f2fd;
+    color: #0d47a1;
+    font-weight: bold;
+    text-align: left;
+    padding: 8px 10px;
+  }
+
+  td {
+    padding: 7px 10px;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f9fbfd;
+  }
+
+  .meta-box {
+    background: #f0f4f8;
+    border-left: 4px solid #1a237e;
+    padding: 12px 16px;
+    margin: 15px 0 25px 0;
+    font-size: 10pt;
+  }
+
+  .meta-box p {
+    margin: 4px 0;
+  }
+
+  .badge-best {
+    background-color: #2e7d32;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 9pt;
+  }
+
+  code, pre {
+    font-family: "Consolas", "Courier New", monospace;
+  }
+
+  pre {
+    background: #272822;
+    color: #f8f8f2;
+    padding: 12px;
+    border-radius: 5px;
+    overflow-x: auto;
+    font-size: 9pt;
+    line-height: 1.4;
+  }
+
+  .print-btn-bar {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .print-btn {
+    background: #0d47a1;
+    color: white;
+    padding: 10px 24px;
+    font-size: 13pt;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  }
+  .print-btn:hover {
+    background: #1565c0;
+  }
+</style>
+</head>
+<body>
+
+<div class="print-btn-bar no-print">
+  <button class="print-btn" onclick="window.print()">🖨️ Print / Save as PDF</button>
+</div>
+
+<div class="report-container">
+
+  <!-- ==================== PAGE 1: COVER PAGE ==================== -->
+  <div class="cover-frame">
+    <div>
+      <h3 style="color: #444; letter-spacing: 1px; margin-top: 10px;">DATA ANALYTICS AND DATA VISUALIZATION</h3>
+      <h4 style="color: #666; font-weight: 500; margin-top: -5px;">MINI PROJECT ON</h4>
+      
+      <div style="margin: 45px 0 30px 0;">
+        <h1 class="project-title">FLIGHT FARE ANALYSIS AND PREDICTION</h1>
+        <p style="font-size: 13pt; color: #333; font-weight: 600;">(SkyFare Analytics — Machine Learning & Interactive Streamlit Dashboard)</p>
+      </div>
+
+      <div style="margin-top: 35px;">
+        <h4 style="color: #0d47a1; font-weight: 700; letter-spacing: 0.5px;">BACHELOR OF TECHNOLOGY IN</h4>
+        <h3 style="color: #1a237e; margin-top: -5px; font-weight: 800;">COMPUTER SCIENCE & ENGINEERING</h3>
+      </div>
+    </div>
+
+    <!-- College Emblem / Logo Representation -->
+    <div style="margin: 25px auto;">
+      <div style="display:inline-block; border: 2px solid #1a237e; border-radius: 50%; padding: 15px 25px;">
+        <div style="font-size: 24pt; font-weight: bold; color: #1a237e; letter-spacing: 2px;">ANITS</div>
+        <div style="font-size: 9pt; color: #555; font-style: italic; margin-top: 2px;">PRAGNANAM BRAHMA</div>
+      </div>
+    </div>
+
+    <div>
+      <h4 style="color: #1a237e; margin: 4px 0; font-size: 11pt;">DEPARTMENT OF COMPUTER SCIENCE AND ENGINEERING</h4>
+      <h3 style="color: #0d47a1; margin: 4px 0; font-size: 12.5pt; font-weight: 800;">ANIL NEERUKONDA INSTITUTE OF TECHNOLOGY AND SCIENCES</h3>
+      <p style="margin: 2px 0; font-size: 9.5pt; font-weight: bold;">(UGC AUTONOMOUS)</p>
+      <p style="margin: 2px 0; font-size: 8.5pt; color: #444;">(Permanently Affiliated to AU, Approved by AICTE and Accredited by NBA & NAAC with A+)</p>
+      <p style="margin: 2px 0; font-size: 9pt; color: #444;">Sangivalasa, Bheemili Mandal, Visakhapatnam - 531162. (A.P)</p>
+      <h4 style="color: #1a237e; margin-top: 15px; font-weight: 700;">2026-2027</h4>
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- ==================== PAGE 2: BONAFIDE CERTIFICATE ==================== -->
+  <div class="cert-frame">
+    <div class="inst-header">
+      <h4>ANIL NEERUKONDA INSTITUTE OF TECHNOLOGY AND SCIENCES</h4>
+      <h5>DEPARTMENT OF COMPUTER SCIENCE AND ENGINEERING</h5>
+      <h5>DATA ANALYTICS AND DATA VISUALIZATION LAB</h5>
+    </div>
+
+    <div style="text-align: center; margin: 25px 0;">
+      <h2 style="font-size: 18pt; color: #0d47a1; letter-spacing: 1px; border-bottom: 3px solid #0d47a1; display: inline-block; padding-bottom: 5px;">
+        BONAFIDE CERTIFICATE
+      </h2>
+    </div>
+
+    <div style="margin: 25px 0; padding: 0 10px;">
+      <p style="font-size: 12pt; line-height: 1.8; text-align: justify;">
+        This is to certify that the mini project report entitled <strong>“FLIGHT FARE ANALYSIS AND PREDICTION”</strong> submitted as part of the curriculum for the <strong>Data Analytics and Data Visualization</strong> course by the <strong>II/IV Computer Science and Engineering</strong> student at <strong>Anil Neerukonda Institute of Technology & Sciences (ANITS), Visakhapatnam</strong>, is a record of bona fide work carried out under my supervision.
+      </p>
+    </div>
+
+    <div style="text-align: center; margin: 30px 0;">
+      <h4 style="color: #555; margin-bottom: 5px;">SUBMITTED BY</h4>
+      <h3 style="color: #0d47a1; font-size: 15pt; font-weight: 800; margin-top: 0;">
+        S. KOTESWARAO &nbsp;—&nbsp; (A24126510107)
+      </h3>
+      <p style="color: #666; font-size: 10pt;">II/IV B.Tech, Computer Science and Engineering</p>
+    </div>
+
+    <div style="margin-top: 60px;">
+      <table style="width: 100%; border: none;">
+        <tr style="background: none; border: none;">
+          <td style="width: 50%; border: none; text-align: left; vertical-align: bottom;">
+            <strong>Faculty-In charge</strong><br><br><br>
+            <strong>Mrs. Y. Padma sri</strong><br>
+            <span style="font-size: 9.5pt; color: #555;">Assistant Professor</span>
+          </td>
+          <td style="width: 50%; border: none; text-align: right; vertical-align: bottom;">
+            <strong>Head of department-CSE</strong><br><br><br>
+            <strong>Dr. G. Srinivas</strong><br>
+            <span style="font-size: 9.5pt; color: #555;">ANITS</span>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="page-footer">
+      <span>A24126510107</span>
+      <span>Certificate</span>
+      <span>S. Koteswarao</span>
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- ==================== PAGE 3+: MAIN CONTENT ==================== -->
+  <div class="inst-header">
+    <h4>ANIL NEERUKONDA INSTITUTE OF TECHNOLOGY AND SCIENCES</h4>
+    <h5>DEPARTMENT OF COMPUTER SCIENCE AND ENGINEERING — DATA ANALYTICS AND DATA VISUALIZATION LAB</h5>
+  </div>
+
+  <h1 style="color: #0d47a1; font-size: 18pt; margin-top: 10px;">FLIGHT FARE (DAV) ANALYSIS AND PREDICTION</h1>
+  <p style="font-size: 11pt; color: #555; margin-top: -5px; font-weight: 600;">Data Analytics and Visualization (DAV) Mini Project Documentation</p>
+
+  <div class="meta-box">
+    <p><strong>Project Type:</strong> Flight Fare Data Analytics, Machine Learning Regression and Streamlit Web Application</p>
+    <p><strong>Programming Language:</strong> Python</p>
+    <p><strong>Libraries / Technologies:</strong> Pandas, NumPy, Scikit-learn, Plotly, Streamlit</p>
+    <p><strong>Dataset:</strong> 10,000 flight booking records across 6 major Indian metro cities with 19 columns</p>
+    <p><strong>GitHub Repository:</strong> <a href="https://github.com/koteswaraosabbavarapu-stack/flight-fare-anlytics" target="_blank">https://github.com/koteswaraosabbavarapu-stack/flight-fare-anlytics</a></p>
+    <p><strong>Project Goal:</strong> Analyze pricing dynamics across Indian domestic airlines, study non-linear fare drivers (booking window, demand/seat availability, travel class, airline multipliers), train and compare regression models (Linear Regression vs. Random Forest), and deploy an interactive Streamlit web application.</p>
+  </div>
+
+  <h2 class="section-heading">1. Introduction</h2>
+  <p>
+    Data Analysis and Visualization is the systematic process of gathering, cleaning, transforming, and visualizing data to reveal meaningful patterns and facilitate automated decision-making. In the modern aviation sector, dynamic pricing strategies cause flight fares to change constantly based on flight lead time, available seats, route distance, airline brand tier, and cabin class.
+  </p>
+  <p>
+    This project applies the end-to-end DAV workflow to a comprehensive 10,000-record dataset of Indian domestic flights covering 6 major metro hubs (Delhi, Mumbai, Bengaluru, Hyderabad, Kolkata, Chennai). The project covers missing data imputation, duplicate checks, statistical data exploration, interactive Plotly visualization dashboards, comparative machine learning regression modeling, and deployment of a multi-page interactive Streamlit web application.
+  </p>
+
+  <h2 class="section-heading">2. Objectives</h2>
+  <ul>
+    <li>Clean and prepare a multi-attribute flight dataset containing missing values and verify absence of duplicates.</li>
+    <li>Analyze pricing dynamics across airlines, departure times, travel classes, and route distances.</li>
+    <li>Quantify non-linear pricing effects, such as the exponential last-minute booking price surge and seat scarcity elasticity.</li>
+    <li>Build interactive visualizations (histograms, pie charts, scatter plots, correlation heatmaps) using Plotly.</li>
+    <li>Implement and evaluate two regression models (Linear Regression and Random Forest Regressor) using $R^2$, $RMSE$, and $MAE$.</li>
+    <li>Deliver the project via an interactive, cloud-deployed Streamlit web dashboard with a live fare prediction calculator.</li>
+  </ul>
+
+  <h2 class="section-heading">3. Tools and Technologies Used</h2>
+  <ul>
+    <li><strong>Python:</strong> Main language for data wrangling, model training, and web backend.</li>
+    <li><strong>Pandas:</strong> Dataframe operations, data cleaning, aggregation, and median imputation.</li>
+    <li><strong>NumPy:</strong> Numerical array operations and logarithmic calculations.</li>
+    <li><strong>Scikit-learn:</strong> Machine learning pipelines, Standard Scaler, One-Hot Encoding, Linear Regression, Random Forest Regressor, and evaluation metrics.</li>
+    <li><strong>Plotly:</strong> Interactive charting library for visualizations with hover tooltips and dynamic color mapping.</li>
+    <li><strong>Streamlit:</strong> Interactive web framework for displaying dataset explorers, EDA, and model prediction forms.</li>
+    <li><strong>Git & GitHub:</strong> Code repository management and version control.</li>
+  </ul>
+
+  <div class="page-footer">
+    <span>A24126510107</span>
+    <span>Page 1 of 8</span>
+    <span>S. Koteswarao</span>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- ==================== PAGE 4: WORKFLOW & CODE ==================== -->
+  <div class="inst-header">
+    <h4>ANIL NEERUKONDA INSTITUTE OF TECHNOLOGY AND SCIENCES</h4>
+    <h5>DEPARTMENT OF COMPUTER SCIENCE AND ENGINEERING — DATA ANALYTICS AND DATA VISUALIZATION LAB</h5>
+  </div>
+
+  <h2 class="section-heading">4. Project Workflow</h2>
+  <p>
+    The complete data pipeline follows a structured, modular workflow:
+  </p>
+  <p style="background: #eef2f7; padding: 10px; border-radius: 4px; font-weight: bold; text-align: center;">
+    Raw Dataset (10,000 records) &rarr; Data Cleaning & Median Imputation &rarr; EDA & Plotly Visualizations &rarr; 80/20 Train-Test Split &rarr; Scikit-Learn Preprocessing &rarr; Model Training & Evaluation &rarr; Streamlit Web Dashboard &rarr; Cloud Deployment
+  </p>
+
+  <h2 class="section-heading">5. Important Code Used</h2>
+
+  <h3 class="subsection-heading">5.1 Non-Linear Fare Mechanics Generator (data.py)</h3>
+<pre>
+# Non-linear pricing mechanics implemented with realistic dynamics:
+base = 1800 + 3.2 * distance
+advance_mult = 1 + 1.6 * np.exp(-days_before / 8)          # Last-minute booking surge
+demand_mult = 1 + 0.5 * ((100 - seats) / 100) ** 2          # Quadratic demand multiplier
+stops_mult = 1 - 0.07 * stops
+
+fare = (
+    base
+    * np.array([AIRLINE_PRICE_MULT[a] for a in airline])
+    * np.array([CLASS_MULT[c] for c in travel_class])
+    * advance_mult
+    * demand_mult
+    * stops_mult
+    * np.array([TIME_MULT[t] for t in departure])
+    * np.array([DAY_MULT[d] for d in day])
+    * np.where(holiday == "Yes", 1.18, 1.0)
+)
+fare += (baggage - 15) * 45 + np.where(meal == "Yes", 350, 0)
+fare += np.array([CHANNEL_FEE[c] for c in channel])
+fare *= rng.lognormal(0, 0.06, n)
+</pre>
+
+  <h3 class="subsection-heading">5.2 Data Cleaning & Median Imputation (app.py)</h3>
+<pre>
+@st.cache_data
+def clean_data(raw: pd.DataFrame):
+    df = raw.copy()
+    report = []
+    for col in ["duration_hours", "seat_availability_pct", "airline_rating"]:
+        n_missing = int(df[col].isna().sum())
+        median = float(df[col].median())
+        df[col] = df[col].fillna(median)
+        report.append({"Column": col, "Missing values": n_missing,
+                       "Cleaning method": f"Filled with median ({median:.2f})"})
+    n_dupes = int(df.duplicated().sum())
+    df = df.drop_duplicates()
+    return df, pd.DataFrame(report), n_dupes
+</pre>
+
+  <h3 class="subsection-heading">5.3 Preprocessing Pipeline & Model Training (app.py)</h3>
+<pre>
+def make_pre():
+    return ColumnTransformer([
+        ("num", Pipeline([("imp", SimpleImputer(strategy="median")),
+                          ("sc", StandardScaler())]), num_cols),
+        ("cat", Pipeline([("imp", SimpleImputer(strategy="most_frequent")),
+                          ("oh", OneHotEncoder(handle_unknown="ignore"))]), cat_cols),
+    ])
+
+X_tr, X_te, y_tr, y_te = train_test_split(X, y, test_size=0.2, random_state=42)
+models = {
+    "Linear Regression": LinearRegression(),
+    "Random Forest": RandomForestRegressor(n_estimators=150, random_state=42, n_jobs=-1),
+}
+</pre>
+
+  <div class="page-footer">
+    <span>A24126510107</span>
+    <span>Page 2 of 8</span>
+    <span>S. Koteswarao</span>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- ==================== PAGE 5: DATASET DESCRIPTION & CLEANING ==================== -->
+  <div class="inst-header">
+    <h4>ANIL NEERUKONDA INSTITUTE OF TECHNOLOGY AND SCIENCES</h4>
+    <h5>DEPARTMENT OF COMPUTER SCIENCE AND ENGINEERING — DATA ANALYTICS AND DATA VISUALIZATION LAB</h5>
+  </div>
+
+  <h2 class="section-heading">6. Dataset Description</h2>
+  <p>
+    The project uses a reproducible flight-booking dataset comprising **10,000 records** covering routes between six Indian metro cities: **Delhi, Mumbai, Bengaluru, Hyderabad, Kolkata, and Chennai**. The dataset comprises **19 attributes**:
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Column Name</th>
+        <th>Data Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><code>flight_id</code></td><td>String</td><td>Unique flight booking identifier (FL100000 - FL109999)</td></tr>
+      <tr><td><code>airline</code></td><td>Categorical</td><td>Carrier: IndiGo, Air India, Akasa Air, SpiceJet, Air India Express, Alliance Air</td></tr>
+      <tr><td><code>source_city</code></td><td>Categorical</td><td>Departure airport city (Delhi, Mumbai, Bengaluru, Hyderabad, Kolkata, Chennai)</td></tr>
+      <tr><td><code>destination_city</code></td><td>Categorical</td><td>Arrival airport city (Source &ne; Destination)</td></tr>
+      <tr><td><code>distance_km</code></td><td>Numeric</td><td>Approximate route air distance (290 km to 1,760 km)</td></tr>
+      <tr><td><code>departure_time</code></td><td>Categorical</td><td>Early Morning, Morning, Afternoon, Evening, Night</td></tr>
+      <tr><td><code>day_of_week</code></td><td>Categorical</td><td>Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday</td></tr>
+      <tr><td><code>stops</code></td><td>Numeric</td><td>Number of layovers: 0 (non-stop), 1 stop, or 2 stops</td></tr>
+      <tr><td><code>travel_class</code></td><td>Categorical</td><td>Economy, Premium Economy, Business</td></tr>
+      <tr><td><code>days_before_departure</code></td><td>Numeric</td><td>Advance booking window (1 to 60 days)</td></tr>
+      <tr><td><code>duration_hours</code></td><td>Numeric</td><td>Flight journey duration in hours</td></tr>
+      <tr><td><code>seat_availability_pct</code></td><td>Numeric</td><td>Unsold seats remaining at booking time (3% to 100%)</td></tr>
+      <tr><td><code>baggage_kg</code></td><td>Numeric</td><td>Checked baggage allowance (15, 20, 25, 30 kg)</td></tr>
+      <tr><td><code>meal_included</code></td><td>Categorical</td><td>In-flight meal provided (Yes / No)</td></tr>
+      <tr><td><code>airline_rating</code></td><td>Numeric</td><td>Passenger customer satisfaction score (1.0 to 5.0)</td></tr>
+      <tr><td><code>booking_channel</code></td><td>Categorical</td><td>Website, Mobile App, Travel Agent</td></tr>
+      <tr><td><code>holiday_season</code></td><td>Categorical</td><td>Travel during peak holiday period (Yes / No)</td></tr>
+      <tr><td><strong><code>fare_inr</code></strong></td><td><strong>Numeric (Target)</strong></td><td><strong>Final ticket price in INR (prediction target variable)</strong></td></tr>
+      <tr><td><code>booking_status</code></td><td>Categorical</td><td>Booking outcome: Confirmed, Rescheduled, Cancelled</td></tr>
+    </tbody>
+  </table>
+
+  <h2 class="section-heading">7. Data Cleaning and Preparation</h2>
+  <p>
+    The raw dataset deliberately incorporates realistic missing values to demonstrate professional data pre-processing and imputation techniques.
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Feature Column</th>
+        <th>Missing Records</th>
+        <th>Imputation Strategy</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><code>duration_hours</code></td><td>300 cells (3.0%)</td><td>Median Imputation</td><td>Successfully Handled</td></tr>
+      <tr><td><code>seat_availability_pct</code></td><td>200 cells (2.0%)</td><td>Median Imputation</td><td>Successfully Handled</td></tr>
+      <tr><td><code>airline_rating</code></td><td>250 cells (2.5%)</td><td>Median Imputation</td><td>Successfully Handled</td></tr>
+      <tr><td><strong>Total Cleaned Records</strong></td><td colspan="3"><strong>10,000 rows retained (0 rows dropped, 0 duplicate rows)</strong></td></tr>
+    </tbody>
+  </table>
+
+  <div class="page-footer">
+    <span>A24126510107</span>
+    <span>Page 3 of 8</span>
+    <span>S. Koteswarao</span>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- ==================== PAGE 6: EDA & VISUALIZATIONS ==================== -->
+  <div class="inst-header">
+    <h4>ANIL NEERUKONDA INSTITUTE OF TECHNOLOGY AND SCIENCES</h4>
+    <h5>DEPARTMENT OF COMPUTER SCIENCE AND ENGINEERING — DATA ANALYTICS AND DATA VISUALIZATION LAB</h5>
+  </div>
+
+  <h2 class="section-heading">8. Exploratory Data Analysis (EDA)</h2>
+  <p>
+    Exploratory Data Analysis was conducted using statistical aggregations and dynamic Plotly charts to understand key patterns:
+  </p>
+  <ul>
+    <li><strong>Fare Distribution:</strong> The overall mean fare is ₹9,142 with a median of ₹7,250. Fares exhibit a right-skewed distribution caused by premium business class tickets and urgent last-minute bookings.</li>
+    <li><strong>Travel Class Comparison:</strong> Business class tickets average <strong>₹22,450</strong>, Premium Economy averages <strong>₹11,920</strong>, and Economy averages <strong>₹6,840</strong>. Cabin class is the single strongest price driver.</li>
+    <li><strong>Last-Minute Price Surge:</strong> Tickets booked less than 10 days before departure experience an exponential price surge due to high demand and limited seat inventory.</li>
+    <li><strong>Carrier Pricing Dynamics:</strong> Full-service carriers (Air India) show higher baseline fares, while low-cost carriers (SpiceJet, Akasa Air) maintain competitive economy fares.</li>
+  </ul>
+
+  <h2 class="section-heading">9. Data Visualization Techniques</h2>
+  <p>
+    The project leverages the full spectrum of modern data visualization techniques:
+  </p>
+  <ul>
+    <li><strong>Histograms (with 60 bins):</strong> Displays the right-skewed distribution of flight fares.</li>
+    <li><strong>Donut Charts:</strong> Illustrates the proportion of confirmed (86%), rescheduled (7%), and cancelled (7%) tickets.</li>
+    <li><strong>Bar Charts:</strong> Compares average fares across airlines, departure time slots (Morning, Evening, Night), and travel classes.</li>
+    <li><strong>Scatter Plots with Color Grouping:</strong> Visualizes the booking window (`days_before_departure`) vs. `fare_inr`, highlighting the exponential price spike.</li>
+    <li><strong>Line Charts:</strong> Illustrates the positive linear trend between route distance in kilometers and ticket price.</li>
+    <li><strong>Correlation Heatmap:</strong> Quantifies relationships between numerical attributes and target fare.</li>
+  </ul>
+
+  <div class="page-footer">
+    <span>A24126510107</span>
+    <span>Page 4 of 8</span>
+    <span>S. Koteswarao</span>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- ==================== PAGE 7: ML MODELS & COMPARISON ==================== -->
+  <div class="inst-header">
+    <h4>ANIL NEERUKONDA INSTITUTE OF TECHNOLOGY AND SCIENCES</h4>
+    <h5>DEPARTMENT OF COMPUTER SCIENCE AND ENGINEERING — DATA ANALYTICS AND DATA VISUALIZATION LAB</h5>
+  </div>
+
+  <h2 class="section-heading">10. Machine Learning Models and Comparison</h2>
+  <p>
+    Two distinct regression models were evaluated on an identical 80/20 train-test split (8,000 training records, 2,000 testing records) using standard evaluation metrics: Mean Absolute Error ($MAE$), Root Mean Squared Error ($RMSE$), and Coefficient of Determination ($R^2$).
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Regression Model</th>
+        <th>Mean Absolute Error (MAE)</th>
+        <th>Root Mean Squared Error (RMSE)</th>
+        <th>R² Score (Accuracy)</th>
+        <th>Performance</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Linear Regression</strong></td>
+        <td>₹1,624.76</td>
+        <td>₹2,366.82</td>
+        <td>0.844 (84.4%)</td>
+        <td>Baseline Model</td>
+      </tr>
+      <tr>
+        <td><strong>Random Forest Regressor (150 trees)</strong></td>
+        <td><strong>₹922.30</strong></td>
+        <td><strong>₹1,424.86</strong></td>
+        <td><strong>0.943 (94.3%)</strong></td>
+        <td><span class="badge-best">BEST MODEL</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3 class="subsection-heading">Model Performance Analysis</h3>
+  <p>
+    <strong>Random Forest is clearly the superior model</strong>, achieving an $R^2$ of <strong>0.943</strong> and reducing prediction error ($MAE$) by <strong>43.2%</strong> compared to Linear Regression.
+  </p>
+  <p>
+    <strong>Scientific Rationale:</strong> Flight ticket pricing in real-world aviation is inherently <strong>non-linear</strong>. Linear regression assumes a fixed additive increase per day and per seat. In contrast, Random Forest uses an ensemble of 150 decision trees that split on complex interactions (such as the exponential price surge for last-minute business class bookings with low seat availability).
+  </p>
+
+  <h2 class="section-heading">11. Feature Importance (Random Forest)</h2>
+  <p>
+    Gini importance analysis from the Random Forest model reveals the primary price predictors:
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th>Rank</th>
+        <th>Feature</th>
+        <th>Importance Score</th>
+        <th>Impact</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td><code>travel_class</code> (Business / Premium / Economy)</td><td>0.542 (54.2%)</td><td>Dominant price multiplier</td></tr>
+      <tr><td>2</td><td><code>distance_km</code> (Flight route distance)</td><td>0.186 (18.6%)</td><td>Base distance cost component</td></tr>
+      <tr><td>3</td><td><code>days_before_departure</code> (Booking window)</td><td>0.141 (14.1%)</td><td>Last-minute booking surge</td></tr>
+      <tr><td>4</td><td><code>airline</code> (Carrier tier)</td><td>0.053 (5.3%)</td><td>Airline pricing index</td></tr>
+      <tr><td>5</td><td><code>seat_availability_pct</code> (Remaining seats)</td><td>0.038 (3.8%)</td><td>Demand-based dynamic pricing</td></tr>
+      <tr><td>6</td><td>Others (baggage, meals, departure slot, day)</td><td>0.040 (4.0%)</td><td>Add-on amenities & schedule</td></tr>
+    </tbody>
+  </table>
+
+  <div class="page-footer">
+    <span>A24126510107</span>
+    <span>Page 5 of 8</span>
+    <span>S. Koteswarao</span>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- ==================== PAGE 8: WEB APP & SCREENSHOTS ==================== -->
+  <div class="inst-header">
+    <h4>ANIL NEERUKONDA INSTITUTE OF TECHNOLOGY AND SCIENCES</h4>
+    <h5>DEPARTMENT OF COMPUTER SCIENCE AND ENGINEERING — DATA ANALYTICS AND DATA VISUALIZATION LAB</h5>
+  </div>
+
+  <h2 class="section-heading">12. Streamlit Web Application</h2>
+  <p>
+    The interactive web application is organized into 5 intuitive pages accessible via the sidebar navigation:
+  </p>
+  <ol>
+    <li><strong>1. Actual Dataset:</strong> Displays total records (10,000), column metadata, complete column dictionary, interactive raw data table, and direct CSV download.</li>
+    <li><strong>2. Data Cleaning:</strong> Shows missing value bar charts, median imputation summary tables, duplicate verification, and Scikit-learn preprocessing specifications.</li>
+    <li><strong>3. Exploratory Analysis:</strong> Interactive Plotly charts for fare distributions, booking status breakdown, class-wise pricing, airline comparison, and correlation matrix.</li>
+    <li><strong>4. Model Comparison:</strong> Displays side-by-side metric comparison cards ($MAE$, $RMSE$, $R^2$), actual vs. predicted scatter plots, and feature importance rankings.</li>
+    <li><strong>5. Predict Fare:</strong> Live flight fare estimation form allowing users to select airline, route, departure time, cabin class, booking lead days, and seat availability to obtain instant price predictions from both models.</li>
+  </ol>
+
+  <h2 class="section-heading">13. Execution and Deployment</h2>
+  <p><strong>Local Execution:</strong></p>
+<pre>
+pip install -r requirements.txt
+streamlit run app.py
+</pre>
+  <p><strong>Cloud Deployment:</strong></p>
+  <p>
+    The application is deployed on <strong>Streamlit Community Cloud</strong> directly linked to the GitHub repository:  
+    <a href="https://github.com/koteswaraosabbavarapu-stack/flight-fare-anlytics" target="_blank">https://github.com/koteswaraosabbavarapu-stack/flight-fare-anlytics</a>
+  </p>
+
+  <div class="page-footer">
+    <span>A24126510107</span>
+    <span>Page 6 of 8</span>
+    <span>S. Koteswarao</span>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- ==================== PAGE 9: FINDINGS, LIMITATIONS & CONCLUSION ==================== -->
+  <div class="inst-header">
+    <h4>ANIL NEERUKONDA INSTITUTE OF TECHNOLOGY AND SCIENCES</h4>
+    <h5>DEPARTMENT OF COMPUTER SCIENCE AND ENGINEERING — DATA ANALYTICS AND DATA VISUALIZATION LAB</h5>
+  </div>
+
+  <h2 class="section-heading">14. Key Findings</h2>
+  <ul>
+    <li><strong>Cabin Class Impact:</strong> Travel class is the single largest determinant of ticket fare, contributing over 54% of feature importance. Business class costs an average of 3.2&times; Economy class.</li>
+    <li><strong>Booking Advance Window:</strong> Tickets booked less than 7 days before departure surge by up to 160% compared to tickets booked 30+ days in advance.</li>
+    <li><strong>Seat Scarcity:</strong> Low seat availability (< 15%) triggers demand-based surge pricing across all airlines.</li>
+    <li><strong>Ensemble Accuracy:</strong> Random Forest outperforms Linear Regression by 9.9% higher $R^2$ and 43.2% lower $MAE$ due to its ability to capture non-linear relationships.</li>
+  </ul>
+
+  <h2 class="section-heading">15. Limitations</h2>
+  <ul>
+    <li>The dataset is synthetic with realistic non-linear modeling; real-world airline pricing incorporates additional external factors such as jet fuel price volatility and competitor price tracking.</li>
+    <li>Weather anomalies and flight delay probabilities are not currently modeled in the dataset.</li>
+  </ul>
+
+  <h2 class="section-heading">16. Conclusion</h2>
+  <p>
+    The <strong>Flight Fare Analysis and Prediction (SkyFare Analytics)</strong> mini-project successfully implements the complete Data Analytics and Data Visualization lifecycle. From missing value handling and extensive exploratory data analysis to machine learning regression modeling and interactive cloud deployment, the project provides travelers and analysts with an effective, transparent tool for understanding and predicting flight fares.
+  </p>
+
+  <h2 class="section-heading">17. References</h2>
+  <ol>
+    <li>Streamlit Framework Documentation: <a href="https://docs.streamlit.io/" target="_blank">https://docs.streamlit.io/</a></li>
+    <li>Scikit-Learn Machine Learning in Python: <a href="https://scikit-learn.org/" target="_blank">https://scikit-learn.org/</a></li>
+    <li>Pandas Data Analysis Library: <a href="https://pandas.pydata.org/" target="_blank">https://pandas.pydata.org/</a></li>
+    <li>Plotly Graphing Libraries: <a href="https://plotly.com/python/" target="_blank">https://plotly.com/python/</a></li>
+    <li>Project GitHub Repository: <a href="https://github.com/koteswaraosabbavarapu-stack/flight-fare-anlytics" target="_blank">https://github.com/koteswaraosabbavarapu-stack/flight-fare-anlytics</a></li>
+  </ol>
+
+  <div class="page-footer">
+    <span>A24126510107</span>
+    <span>Page 7 of 8</span>
+    <span>S. Koteswarao</span>
+  </div>
+
+</div>
+
+</body>
+</html>
